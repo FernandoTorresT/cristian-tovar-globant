@@ -1,0 +1,22 @@
+version: '3'
+services:
+  task-management-backend:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    container_name: backend-container
+    ports:
+      - 8080:8000
+    volumes:
+      - ./certs:/backend/certs
+    networks:
+      mynetwork:
+        aliases:
+          - backend-network
+networks:
+  mynetwork:
+
+
+
+  
+   

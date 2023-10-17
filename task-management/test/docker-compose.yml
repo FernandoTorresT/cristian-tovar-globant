@@ -1,0 +1,8 @@
+version: '3'
+services:
+  task-management-test:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/test

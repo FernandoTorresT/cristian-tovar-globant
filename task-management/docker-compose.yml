@@ -1,0 +1,63 @@
+version: '3'
+services:
+  task-management-frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: frontend-container
+    ports:
+      - 8081:80
+    volumes:
+      - ./src:/app/src
+    networks:
+      mynetwork:
+        aliases:
+          - frontend-network
+  task-management-backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: backend-container
+    ports:
+      - 8080:8000
+    volumes:
+      - ./certs:/backend/certs
+    networks:
+      mynetwork:
+        aliases:
+          - backend-network
+  task-management-database: 
+    build: 
+      context: ./database
+      dockerfile: Dockerfile 
+    environment: 
+      POSTGRES_USER: usuario
+      POSTGRES_PASSWORD: contrasena
+      POSTGRES_DB: globant
+    ports:
+      - "5432:5432" 
+    networks:
+      mynetwork:
+        aliases:
+          - database-network
+    volumes:
+      - ./data:/var/lib/postgresql/data
+  jupyter:
+    build:
+      context: ./bigdata
+      dockerfile: Dockerfile
+    ports:
+      - 8888:8888
+    volumes:
+      - .:/home/jovyan/work
+    networks:
+      mynetwork:
+        aliases:
+          - bigdata-network
+networks:
+  mynetwork:
+
+
+
+  
+   

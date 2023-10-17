@@ -20,5 +20,15 @@ Antes de comenzar, asegúrate de tener Docker y Visual Studio Code instalados en
    docker run --rm -p 8888:8888 -e JUPYTER_ENABLE_LAB=yes -v "$PWD":/home/jovyan/work jupyter/all-spark-notebook
 
 
+   docker run --name mi-postgres -e POSTGRES_PASSWORD=contrasena -e POSTGRES_USER=usuario -e POSTGRES_DB=globant -p 5432:5432 -d postgres
+
+                                                
 
 
+ docker network create my-network
+
+   
+   docker run --rm -p 8888:8888 --network my-network -e JUPYTER_ENABLE_LAB=yes -v "$PWD":/home/jovyan/work jupyter/all-spark-notebook
+
+
+   docker run --name mi-postgres --network my-network -e POSTGRES_PASSWORD=contrasena -e POSTGRES_USER=usuario -e POSTGRES_DB=globant -p 5432:5432 -d postgres

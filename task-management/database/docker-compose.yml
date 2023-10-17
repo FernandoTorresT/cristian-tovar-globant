@@ -1,0 +1,22 @@
+version: '3'
+services:
+  task-management-database: 
+    build: 
+      context: ./
+      dockerfile: Dockerfile 
+    environment: 
+      POSTGRES_USER: usuario
+      POSTGRES_PASSWORD: contrasena
+      POSTGRES_DB: globant
+    ports:
+      - "5432:5432" 
+    networks:
+      mynetwork:
+        aliases:
+          - database-network
+    volumes:
+      - ./data:/var/lib/postgresql/data
+
+
+  
+   
